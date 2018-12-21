@@ -17,6 +17,7 @@
       <b-nav-item href="#/kontak">Kontak</b-nav-item> 
       <b-nav-item href="#/login">Login</b-nav-item> 
       <b-nav-item href="#/pelem">Pelem</b-nav-item> 
+      <b-nav-item href="#/hero">Hero</b-nav-item> 
     </b-navbar-nav>
 
     <!-- Right aligned nav items -->

@@ -50,6 +50,10 @@
 </template>
 
 <script>
+
+
+    //import firebase from "firebase";
+
 export default {
   data () {
     return {
@@ -64,6 +68,16 @@ export default {
     onSubmit (evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
+
+      /*var database = firebase.database();
+
+      firebase.database().ref('member/sRzmQEkfvZiiIr8i49MB').set({
+          nama: "kangmas",
+          email: "email@gmail.com" 
+        });*/
+
+
+
     },
     onReset (evt) {
       evt.preventDefault();
