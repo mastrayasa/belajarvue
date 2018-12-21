@@ -1,17 +1,22 @@
 <template>
   <div id="app"> 
 
+
+
   <b-navbar toggleable="md" type="dark" variant="info">
 
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-  <b-navbar-brand href="#">NavBar</b-navbar-brand>
+  <b-navbar-brand href="#">APP Keren</b-navbar-brand>
 
   <b-collapse is-nav id="nav_collapse">
 
     <b-navbar-nav>
       <b-nav-item href="#/">Beranda</b-nav-item>
       <b-nav-item href="#/about">Tentang</b-nav-item>
+      <b-nav-item href="#/kontak">Kontak</b-nav-item> 
+      <b-nav-item href="#/login">Login</b-nav-item> 
+      <b-nav-item href="#/pelem">Pelem</b-nav-item> 
     </b-navbar-nav>
 
     <!-- Right aligned nav items -->
@@ -43,19 +48,17 @@
 </b-navbar>
 
   	<div class="container">
-  		<div class="row">	
-  			<div class="col-md-12">
-
-  				 
-			 
- 
-
-
-  				
-  				
-  			</div> 	
-  		</div>
+  		
   		<router-view/>
+
+      <div class="row"> 
+        <div class="col-md-12 text-center mb-5 mt-5"> 
+            <hr>
+            dikembangkan oleh : anak bangsa
+        </div>  
+      </div>
+
+
   	</div>
   
     
