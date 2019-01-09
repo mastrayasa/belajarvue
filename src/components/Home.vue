@@ -52,41 +52,27 @@
                 <button v-on:click="editMsg" v-if="showMsg" class="btn btn-primary btn-sm">edit pesan</button>
     
             </div>
-        </div>
+        </div> 
 
- 
-    
-
-     
-
-   
-    
-     
-
-      <b-card  v-for="berita in news" class="mb-4"> 
-  <b-media no-body>
-    <b-media-aside vertical-align="top">
-        <img src="@/assets/server.jpeg" width="128" height="128" alt="placeholder" /> 
-    </b-media-aside>
-    <b-media-body class="ml-3">
-      <h5 class="mt-0">{{ berita.title }}</h5>
-      <p>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-        Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-        in faucibus.
-      </p> 
-
-      <b-button size="sm" variant="primary">
-                Baca Selengkapnya
-            </b-button>
-      
-    </b-media-body>
-  </b-media>
-</b-card>
-
-    
-
+        <b-card  v-for="(berita,index) in news" class="mb-4" :key="index"> 
+            <b-media no-body>
+                <b-media-aside vertical-align="top">
+                    <img src="@/assets/server.jpeg" width="128" height="128" alt="placeholder" /> 
+                </b-media-aside>
+                <b-media-body class="ml-3">
+                    <h5 class="mt-0">{{ berita.title }}</h5>
+                    <p>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                    sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
+                    in faucibus.
+                    </p> 
+                    <b-button size="sm" variant="primary">
+                        Baca Selengkapnya
+                    </b-button>
+                </b-media-body>
+            </b-media>
+        </b-card>
     <form>
       <input placeholder="Judul Berita" type="text" name="" v-model="judul" ref="my_input">
       <button type="button" @click.prevent="kirimBerita()">kirim</button>
@@ -99,8 +85,9 @@
 </template>
 
 <script>
-    import Slider from '@/components/Slider' 
 
+
+import Slider from '@/components/Slider' 
 
 export default {
   name: 'Home',

@@ -4,13 +4,13 @@ import Vue from 'vue';
 Vue.use(Vuex)
 import data from '../api/data'
 export default new Vuex.Store({
-	state :{
+	state:{
 		students:[]
 	},
-	getters :{
+	getters:{
 
 	},
-	actions: {
+	actions:{
 		getStudents(context){
 			context.commit('setStudents')
 		},
@@ -26,13 +26,10 @@ export default new Vuex.Store({
 			state.students = data.getStudents()
 		},
 		addPowerHero(state,index){
-			//console.log(index)
 			state.students[index].power = state.students[index].power + 1
 		},
 		minPowerHero(state,index){
-			//console.log(index)
 			state.students[index].power = state.students[index].power - 1
 		}
 	}
 })
-
