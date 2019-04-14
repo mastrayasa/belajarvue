@@ -3,10 +3,6 @@
    
         <div class="col-md-12">
 
-
-
-			 
-       
 			<b-img-lazy :src="gambar(pelem.poster_path)" fluid-grow  alt="img1" />
 			
 			<h1>{{ pelem.title }}</h1>
@@ -14,8 +10,6 @@
                         {{ pelem.overview }}
                     </p>
             <small class="text-muted">{{ pelem.vote_average }} / {{ pelem.release_date }}</small>
-               
-           
 
         </div>
     </div>
@@ -44,5 +38,3 @@ export default {
   }
 }
 </script>
-
- 

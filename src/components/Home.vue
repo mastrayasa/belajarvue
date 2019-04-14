@@ -5,8 +5,6 @@
          <Slider />
     </div>
    
-
-
     <div class="row">
       <div class="col-md-4">
 
@@ -20,7 +18,6 @@
                 <p>{{ user.hobi }}</p>
             </div> 
         </div> 
-
 
         <b-list-group>
             <b-list-group-item>PHP</b-list-group-item>
@@ -36,7 +33,6 @@
 
       </div>
       <div class="col-md-8">
-        
         
         <div class="row mb-3">
             <div class="col-md-12 text-center">
@@ -85,7 +81,6 @@
 </template>
 
 <script>
-
 
 import Slider from '@/components/Slider' 
 

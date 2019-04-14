@@ -52,11 +52,12 @@ export default new Router({
       name: 'Kontak',
       component: Kontak
     },
-    { 
+    {
       path: '/pelem',
       name: 'Pelem',
       component: Pelem
-    },{
+    },
+    {
       path: '/pelem/detail/:id',
       name: 'Pelemdetail',
       component: Pelemdetail

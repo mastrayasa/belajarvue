@@ -9,10 +9,7 @@
           tag="article"
           style="max-width: 20rem;"
           class="mb-2">
-     
- 
 
-  		 
   		<b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="exampleInputGroup1"
                     label="Alamat Email"
@@ -37,8 +34,6 @@
         </b-form-input>
       </b-form-group>
        
-      
-
       <b-button type="submit" variant="primary">Login</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
@@ -50,7 +45,6 @@
 </template>
 
 <script>
-
 
     //import firebase from "firebase";
 

@@ -72,4 +72,3 @@ export default {
   }
 }
 </script>
-<!-- carousel-1.vue -->

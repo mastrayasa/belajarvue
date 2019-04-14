@@ -9,8 +9,6 @@
 
             <Loading v-if="loadingPelem" />
 
-           
-
             <b-card-group columns>
                 <b-card v-for="(item,index) in pelem" :title="item.title"
                       :img-src="gambar(item.poster_path)"
@@ -38,7 +36,6 @@
         <b-modal id="modal1" v-b-modal.modallg ref="modal1" title="Detail Pelem">
 		     <Modalpelem />
 		  </b-modal>
-
 
     </div>
 </template>
