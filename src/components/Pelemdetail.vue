@@ -14,7 +14,7 @@
         </div>
     </div>
 </template>
-
+ 
 <script>
      
 import storepelem from '../store/pelem'; 

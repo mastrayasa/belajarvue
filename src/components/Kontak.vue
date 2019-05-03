@@ -36,14 +36,14 @@
 		<b-form-group
 			id="fieldset1e"
 			label="Email"
-			label-for="input1" >
-			<b-form-input id="input1"   v-model.trim="email"></b-form-input>
+			label-for="input2" >
+			<b-form-input id="input2"   v-model.trim="email"></b-form-input>
 		</b-form-group>
 
 		<b-form-group
 			id="fieldset1ee" 
 			label="Pesan"
-			label-for="input1" >
+			label-for="textarea1" >
 			<b-form-textarea id="textarea1"
                      v-model="text" 
                      placeholder="Ketik Pesan anda disini"
@@ -82,7 +82,9 @@ export default {
   },
   data () {
     return {
-      name: ''
+      name: 'john doe',
+      email:'info@example.com',
+      text:'halo'
     }
   }
 }
