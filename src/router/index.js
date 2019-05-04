@@ -10,24 +10,20 @@ import Pelem from '@/components/Pelem'
 import Pelemdetail from '@/components/Pelemdetail'
 import Hero from '@/components/Hero'
 import News from '@/components/news/News'
-
+import ManageNews from '@/components/news/ManageNews'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-/* eslint-disable no-new */
 import firebase from "firebase";
-/*// Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDLh-xuxgGz27q10EuAUeHFPqS2Ga1y1dk",
-    authDomain: "blog-392cd.firebaseapp.com",
-    databaseURL: "https://blog-392cd.firebaseio.com",
-    projectId: "blog-392cd",
-    storageBucket: "blog-392cd.appspot.com",
-    messagingSenderId: "999054194231"
-  };
-  firebase.initializeApp(config); */
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
+
+
+const moment = require('moment')
+require('moment/locale/id')
+Vue.use(require('vue-moment'), {moment})
 
 import Auth from '../Auth.js'
 Vue.use(Auth)
@@ -85,6 +81,11 @@ const router = new Router({
       path: '/news',
       name: 'News',
       component: News
+    },
+    {
+      path: '/manage-news',
+      name: 'ManageNews',
+      component: ManageNews
     }
   ]
 });

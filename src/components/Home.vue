@@ -1,5 +1,5 @@
 <template>
-  <div class="hello mt-5">
+  <div class="hello mt-4">
 
     <div class="mb-5">
          <Slider />
@@ -8,16 +8,16 @@
     <div class="row">
       <div class="col-md-4">
 
-        <div class="text-center">
-
-
-            <img src="@/assets/profil.jpg" class="img-fluid w-100 mb-3" />
-
-            <div class="text-center">
-                <h2>{{ user.nama }}</h2>
-                <p>{{ user.hobi }}</p>
-            </div> 
-        </div> 
+       <!--  <div class="text-center">
+       
+       
+           <img src="@/assets/profil.jpg" class="img-fluid w-100 mb-3" />
+       
+           <div class="text-center">
+               <h2>{{ user.nama }}</h2>
+               <p>{{ user.hobi }}</p>
+           </div> 
+       </div>  -->
 
         <b-list-group>
             <b-list-group-item>PHP</b-list-group-item>
@@ -56,23 +56,18 @@
                     <img src="@/assets/server.jpeg" width="128" height="128" alt="placeholder" /> 
                 </b-media-aside>
                 <b-media-body class="ml-3">
-                    <h5 class="mt-0">{{ berita.title }}</h5>
+                    <h5 class="mt-0">
+                        <strong>{{ berita.title }}</strong>
+                    </h5>
                     <p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                    sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-                    in faucibus.
-                    </p> 
-                    <b-button size="sm" variant="primary">
-                        Baca Selengkapnya
-                    </b-button>
+                        <i class="text-muted">{{ berita.tanggal | moment("dddd, Do MMMM YYYY H:mm") }} </i>
+                        <br>
+                        {{ berita.isi }}</p> 
+
                 </b-media-body>
             </b-media>
         </b-card>
-    <form>
-      <input placeholder="Judul Berita" type="text" name="" v-model="judul" ref="my_input">
-      <button type="button" @click.prevent="kirimBerita()">kirim</button>
-    </form>
+    
 
 
       </div>
@@ -81,7 +76,7 @@
 </template>
 
 <script>
-
+ import firebase from "firebase";
 import Slider from '@/components/Slider' 
 
 export default {
@@ -98,13 +93,27 @@ export default {
         nama:"Mastra",
         hobi:"ngoding"
       },
-      news:[
-      {title:"Server facebook di masuki kecoa"},
-      {title:"Tidak ada yang tahu server itu aman sampai kapan?"},
-      {title:"Server itu nampak bagus tapi ternyata..."} 
-      ]
+      news:[]
     }
   },
+  created(){
+
+    var listNews = firebase.database().ref().child('news').orderByChild('tanggal/last');
+
+     listNews.once("value", notes => {
+      notes.forEach(note => {
+        this.news.push({
+          id: note.ref.key,
+          title: note.child("title").val(),
+          isi: note.child("isi").val(),
+          tanggal: note.child("tanggal").val()
+        });
+      });
+    });
+
+      
+
+   },
   methods:{
     editMsg: function(e){
       this.showMsg = false 
@@ -112,7 +121,7 @@ export default {
     submitMsg: function(e){
       this.showMsg = true 
     },
-    kirimBerita(){
+    /*kirimBerita(){
       console.log("susu")
       if(this.judul != ""){
       this.news.push({title: this.$refs.my_input.value })
@@ -120,7 +129,7 @@ export default {
     } else{
       alert("isi judul berita")
     }
-    }
+    }*/
   }
 }
 </script>

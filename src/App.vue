@@ -1,13 +1,8 @@
 <template>
   <div id="app"> 
-
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <b-navbar toggleable="md" type="dark" variant="info">
-
+  
+        <b-navbar toggleable="md" type="dark" variant="info" sticky>
+           
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
   <b-navbar-brand href="#">Website Keren</b-navbar-brand>
@@ -49,13 +44,13 @@
       <b-nav-item href="#/login" v-if="!isLogin">Login</b-nav-item> 
       <b-nav-item href="#/daftar" v-if="!isLogin">Daftar</b-nav-item> 
       <b-nav-item href="#/profile" v-if="isLogin">Profil</b-nav-item> 
+      <b-nav-item href="#/manage-news" v-if="isLogin">Berita</b-nav-item> 
     </b-navbar-nav>
 
   </b-collapse>
+    
 </b-navbar>
-      </div>
-    </div>
-  </div>
+     
 
   	<div class="container">
   		

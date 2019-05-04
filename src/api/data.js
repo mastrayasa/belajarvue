@@ -19,6 +19,21 @@ const students = [
 		'name': 'Sengkuni',
 		'power': 6,
 		'hobi': ['Mancing','Ngoding']
+	},{
+		'id': 5,
+		'name': 'Doraemon',
+		'power': 6,
+		'hobi': ['Mancing','Ngoding']
+	},{
+		'id': 6,
+		'name': 'Jokowi',
+		'power': 6,
+		'hobi': ['Mancing','Ngoding']
+	},{
+		'id': 7,
+		'name': 'SBY',
+		'power': 6,
+		'hobi': ['Mancing','Ngoding']
 	}
 ]
 

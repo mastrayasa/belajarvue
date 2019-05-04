@@ -66,7 +66,6 @@ export default {
         firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password).then(  (user) => {
           this.$auth.setLogin("anu");
           
-          
           this.$router.replace('profile')
         } ,
           (err)  => {

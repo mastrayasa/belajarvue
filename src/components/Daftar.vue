@@ -28,7 +28,19 @@
                       type="password"
                       v-model="form.password"
                       required
-                      placeholder="Kata Sandi">
+                      placeholder="Kata Sandi Baru">
+        </b-form-input>
+      </b-form-group>
+
+
+      <b-form-group id="exampleInputGroup3"
+                    label="Ulangi Kata Sandi"
+                    label-for="exampleInput3">
+        <b-form-input id="exampleInput3"
+                      type="password"
+                      v-model="form.rePassword"
+                      required
+                      placeholder="Ulangi Kata Sandi">
         </b-form-input>
       </b-form-group>
        
@@ -43,43 +55,40 @@
 </template>
 
 <script>
-
-    import firebase from "firebase";
-
+import firebase from "firebase";
 export default {
   data () {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        rePassword:''
       }, 
       show: true
     }
   },
   methods: {
     onSubmit (evt) {
-        evt.preventDefault();
-        //alert(JSON.stringify(this.form));
-
-        firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => {
-          this.$auth.setLogin("anu");
-          this.$router.replace('profile')
-        } ,
-          (err)  => {
-            console.log(err)
-            alert("opsss" + err.message)
-         }
-         );
-
-        
-
-
+        evt.preventDefault(); 
+        if(this.form.password == this.form.rePassword){
+            firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => {
+                this.$auth.setLogin("anu");
+                this.$router.replace('profile')
+            },
+            (err)  => {
+                console.log(err)
+                alert("opsss" + err.message)
+             });
+        } else  {
+            alert("Kata sandi tidak sama")
+        }
     },
     onReset (evt) {
       evt.preventDefault();
       /* Reset our form values */
       this.form.email = '';
       this.form.password = ''; 
+      this.form.rePassword = ''; 
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });
