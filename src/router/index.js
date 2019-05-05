@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Maincontent from '@/components/Maincontent'
 import Home from '@/components/Home'
 import About from '@/components/About'
 import Login from '@/components/Login'
@@ -10,6 +11,7 @@ import Pelem from '@/components/Pelem'
 import Pelemdetail from '@/components/Pelemdetail'
 import Hero from '@/components/Hero'
 import News from '@/components/news/News'
+import NewsDetail from '@/components/news/NewsDetail'
 import ManageNews from '@/components/news/ManageNews'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -38,8 +40,14 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Home', 
+      component: Maincontent,
+      children:[
+        {
+          path:'',
+          component: Home
+        } 
+      ]
     },
     {
       path: '/profile',
@@ -79,10 +87,23 @@ const router = new Router({
     },
     {
       path: '/news',
+      meta: {label: 'News'},
       name: 'News',
-      component: News
+      component: Maincontent,
+      children:[
+        {
+          path:'',
+          component: News
+        },
+        {
+          path: ':id',
+          meta: {label: 'News Detail'},
+          name: 'NewsDetail',
+          component: NewsDetail
+        }
+      ]
     },
-    {
+    { 
       path: '/manage-news',
       name: 'ManageNews',
       component: ManageNews

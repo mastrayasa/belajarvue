@@ -7,7 +7,7 @@
 
          	<h2>The Pelem</h2>
 
-            <Loading v-if="loadingPelem" />
+            <Loading v-if="isLoading" />
 
             <b-card-group columns>
                 <b-card v-for="(item,index) in pelem" :title="item.title"
@@ -52,10 +52,9 @@ export default {
     Loading,
     Modalpelem
   },
-  
   data () {
     return {
-        loadingPelem:true,
+        isLoading:true,
     	breadcrumb: [{
         text: 'Beranda',
         href: '#/'
@@ -67,28 +66,22 @@ export default {
 		}
   },
   created() {
-
 		this.ambilData();
 	},
   methods:{
   	lihatPelem: function(index){
   		storepelem.dispatch("savePelem",this.pelem[index])
-  		this.$refs.modal1.show()
-  		//this.$router.push('pelem/detail') 
+  		this.$refs.modal1.show() 
 	},
   	gambar : function (path){
   		return 'http://image.tmdb.org/t/p/w342' + path;
   	},
      ambilData: function() {
-			var url = "http://api.themoviedb.org/3/movie/popular?api_key=b5481a85cbb44c13c6c6931834845104&page=1";
-			//console.log(url);
-
+			var url = "http://api.themoviedb.org/3/movie/popular?api_key=b5481a85cbb44c13c6c6931834845104&page=1"; 
 			this.$http.get(url).then((res) => {
-			  //console.log(res.data.results)
+			  this.isLoading = false
 			  this.pelem = res.data.results
-			})
-
-			 this.loadingPelem = false
+			}) 
 		},
   }
 }

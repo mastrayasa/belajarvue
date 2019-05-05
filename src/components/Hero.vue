@@ -1,28 +1,34 @@
 <template>
   <div class="mt-5">
-  	 <ul>
+	
+	<h2>Hero Power</h2>
+  	<b-row>
+		<b-col>
+			<ul>
   	 	<li v-for="(item, index) in students" :key="item.id" class="mb-4">
   	 		{{ item.name }} : 
   	 		{{ item.power }} 
-  	 		<button @click="addPower(index)" class="btn btn-primary btn-sm">+ Power</button>
-  	 		<button @click="minPower(index)" class="btn btn-primary btn-sm">- Power</button>
+  	 		<button @click="minPower(index)" class="btn btn-primary btn-sm">-</button>
+  	 		<button @click="addPower(index)" class="btn btn-primary btn-sm">+</button>
+  	 		
   	 	</li>
   	 </ul>
+		</b-col>
 
-  	 <hr>
-
-  	 <Hero2 />
+		<b-col> <HeroList />
+		</b-col>
+  	</b-row> 
   </div>
 </template>
 
 <script> 
 
 import store from '../store/index';
-import Hero2 from '@/components/Hero2' 
+import HeroList from '@/components/HeroList' 
 
 export default { 
 	components: {
-	    Hero2
+	    HeroList
 	},
 	methods: {
 		addPower: function(index){

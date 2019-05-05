@@ -1,91 +1,91 @@
 <template>
-    <div class="row mt-5">
+    <div>
    
-        <div class="col-md-12">
+        <b-breadcrumb :items="breadcrumb" />
 
-         	<b-breadcrumb :items="breadcrumb" />
+        <h2>Berita</h2>
 
-         	<h2>Berita</h2>
+        <Loading v-if="isLoading" />
 
-            <Loading v-if="loadingPelem" />
-
-            <b-card-group columns>
-                <b-card v-for="(item,index) in news" :title="item.title"
-                      :img-src="gambar(item.poster_path)"
-                      img-alt="Image"
-                      img-top
-                      tag="article"
-                      :key="item.id"
-                      style="max-width: 20rem;"
-                      class="mb-4">
-
-                    <p class="card-text">
-                        {{ item.overview.substring(0,100) }}...
-                    </p> 
-                    <div slot="footer">
-                        <small class="text-muted">{{ item.vote_average }} / {{ item.release_date }}</small>
-                        <button @click="lihatPelem(index)">Liat di Modal</button>
-
-                        <router-link :to="{ path: 'pelem/detail/' + item.id}" class="float-right">Lihat</router-link>
-                    </div>
-              </b-card>
-            </b-card-group>
-
-        </div>
-
-        <b-modal id="modal1" v-b-modal.modallg ref="modal1" title="Detail Pelem">
-		     <Modalpelem />
-		  </b-modal>
-
+        <b-card  v-for="(berita,index) in news" class="mb-4" :key="index"> 
+            <b-media no-body>
+                <b-media-aside vertical-align="top">
+                    <img src="@/assets/server.jpeg" width="128" height="128" alt="placeholder" /> 
+                </b-media-aside>
+                <b-media-body class="ml-3">
+                    <h5 class="mt-0">
+                        <strong>{{ berita.title }}</strong>
+                    </h5>
+                    <p>
+                        <i class="text-muted">{{ berita.tanggal | moment("dddd, Do MMMM YYYY H:mm") }} </i>
+                        <br>
+                        {{ berita.isi | truncate }}
+                        <br>
+                        <router-link :to="'news/' + berita.id ">Selengkapnya</router-link>
+                    </p>   
+                </b-media-body>
+            </b-media>
+        </b-card> 
     </div>
 </template>
 
 <script>
-     
-import Loading from '@/components/Loading'
-import Modalpelem from '@/components/Modalpelem'
+import firebase from "firebase";    
+import Loading from '@/components/Loading' 
 
 export default {
   name: 'News',
   components: {
-    Loading,
-    Modalpelem
+    Loading 
   },
+  filters: {
   
-  data () {
-    return {
-        loadingPelem:true,
-    	breadcrumb: [{
-        text: 'Beranda',
-        href: '#/'
-      },   {
-        text: 'Berita',
-        active: true
-      }],
-			news: [] 
-		}
-  },
-  created() {
+        truncate: function(string) {
+          return string.substring(0, 100) + '...';
+        }
+      
+    },
+    data () {
+        return {
+          isLoading:true,
+        	breadcrumb: [
+                {
+                    text: 'Beranda',
+                    href: '#/'
+                },   
+                {
+                    text: 'Berita',
+                    active: true
+                }
+            ],
+    		news: [] 
+    	}
+    },
+    created() {
 
-		this.ambilData();
+		this.getNews();
+        console.log("created")
 	},
-  methods:{
+    methods:{
   	 
-     ambilData: function() {
+        getNews: function() {
 
-      var config = {
-    headers: {'Access-Control-Allow-Origin': '*'}
-};
-			var url = " "; 
+            var listNews = firebase.database().ref().child('news').orderByChild('tanggal/last');
 
-			this.$http.get(url).then((res) => {
-       // console.log(res)
-			  this.news = res.data.items
-			})
-
-			 this.loadingPelem = false
-		},
-  }
+             listNews.once("value", news => {
+              this.isLoading = false;
+              news.forEach(berita => {
+                this.news.push({
+                  id: berita.ref.key,
+                  title: berita.child("title").val(),
+                  isi: berita.child("isi").val(),
+                  tanggal: berita.child("tanggal").val()
+                });
+              });
+            });
+			     this.loading = false
+		    },
+    }
 }
 </script>
 

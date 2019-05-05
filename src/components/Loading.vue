@@ -1,7 +1,8 @@
 <template>
   <div>
-  	Loading...
-  	<img src="@/assets/lg.circle-slack-loading-icon.gif" />
+  	<p class="text-center"> 
+  		<img alt="Loading..." src="@/assets/lg.circle-slack-loading-icon.gif" />
+  	</p>
   </div>
 </template>
 

@@ -14,8 +14,8 @@
 
      <div class="col-md-6">
 
-     	Hubungi kami <br>
-      	<b>PT. Maju Sumber Perkasa</b> <br>
+     	  <h2>Hubungi kami</h2>
+      	<b>PT. Maju Mundur Bersama</b> <br>
       	Jl. Kartini No.41 Kota Palu Sulawesi Tengah, Indonesia
      </div>
 

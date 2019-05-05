@@ -5,7 +5,7 @@
            
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-  <b-navbar-brand href="#">Website Keren</b-navbar-brand>
+  <b-navbar-brand href="#/">Website Keren</b-navbar-brand>
 
   <b-collapse is-nav id="nav_collapse">
 
@@ -59,7 +59,11 @@
       <div class="row"> 
         <div class="col-md-12 text-center mb-5 mt-5"> 
             <hr>
-            dikembangkan oleh : anak bangsa
+            <span class="text-muted">
+              <i>
+                dikembangkan dengan cinta oleh  anak bangsa
+              </i>
+            </span>
         </div>  
       </div>
 

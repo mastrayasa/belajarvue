@@ -2,8 +2,10 @@
   <div class="row mt-5">
   	<div class="col-md-4"> </div>
   	<div class="col-md-4"> 
+
+      <Loading v-if="isLoading" />
 <b-card title="Daftar"
-         
+          v-if="!isLoading"
           tag="article"
           style="max-width: 20rem;"
           class="mb-2">
@@ -42,10 +44,16 @@
                       required
                       placeholder="Ulangi Kata Sandi">
         </b-form-input>
-      </b-form-group>
-       
-      <b-button type="submit" variant="primary">Daftar</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      </b-form-group> 
+      <b-row>
+        <b-col><b-button block type="submit" variant="primary">Daftar</b-button></b-col> 
+        <b-col><b-button block type="reset" variant="danger">Reset</b-button></b-col> 
+      </b-row>
+      <hr>
+      <p>
+          belum punya akun? <router-link :to="'login'">Login disini</router-link>
+      </p>
+
     </b-form>
 
      </b-card>
@@ -55,10 +63,15 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading'
 import firebase from "firebase";
 export default {
+  components: {
+    Loading
+  },
   data () {
     return {
+      isLoading:false,
       form: {
         email: '',
         password: '',
@@ -70,13 +83,15 @@ export default {
   methods: {
     onSubmit (evt) {
         evt.preventDefault(); 
+        this.isLoading = true;
         if(this.form.password == this.form.rePassword){
             firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => {
-                this.$auth.setLogin("anu");
+                this.isLoading = false;
+                this.$auth.setLogin("isLogin");
                 this.$router.replace('profile')
             },
             (err)  => {
-                console.log(err)
+                this.isLoading = false;
                 alert("opsss" + err.message)
              });
         } else  {
