@@ -1,26 +1,6 @@
 <template>
-  <div class="hello mt-4"> 
-   
-    <div class="row">
-      <div class="col-md-4"> 
-
-        <b-list-group>
-            <b-list-group-item>PHP</b-list-group-item>
-            <b-list-group-item>Javascript</b-list-group-item>
-            <b-list-group-item>Java</b-list-group-item>
-            <b-list-group-item>C++</b-list-group-item>
-            <b-list-group-item>Golang</b-list-group-item>
-            <b-list-group-item>Wordpress</b-list-group-item>
-            <b-list-group-item>Laravel</b-list-group-item>
-            <b-list-group-item>MySQL</b-list-group-item>
-            <b-list-group-item>VueJs</b-list-group-item>
-        </b-list-group>  
-
-      </div>
-      <div class="col-md-8"> 
-        <router-view/> 
-      </div>
-    </div>
+  <div class="hi">  
+    <router-view/> 
   </div>
 </template>
 

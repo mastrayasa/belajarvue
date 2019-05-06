@@ -9,10 +9,17 @@
 
              <b-button @click="modeAddNews" v-if="!addNews" variant="outline-primary">Tambah Baru </b-button>
                 
-              <b-table v-if="!addNews" hover :items="news" :fields="fields">
+              <b-table v-if="!addNews" hover outlined :items="news" :fields="fields">
                     <template slot="tanggal" slot-scope="data"> 
                         {{ data.value | moment("dddd, Do MMMM YYYY H:mm") }}
                     </template>
+
+                    <template slot="aksi" slot-scope="row"> 
+                    <a class="btn btn-outline-danger" :href="`#/manage-news/edit/${ row.item.id }`">edit</a>
+
+                    <b-button @click="hapusNews(row.item)" variant="outline-primary">hapus</b-button> 
+
+                  </template>
               </b-table>
 
               
@@ -69,7 +76,7 @@ export default {
   
   data () {
     return {
-         fields: [
+          fields: [
             {
                 key:"title",
                 label: 'Judul',
@@ -79,11 +86,14 @@ export default {
                 key:"tanggal",
                 label: 'Dibuat',
                 sortable: true,
+            },
+            {
+                key:"aksi",
+                label: 'Aksi' 
             }
-         ],
-         tanggal: 1556941867661,
-        addNews:false, 
-		news: [],
+         ], 
+          addNews:false, 
+		      news: [],
         form: {
                 title: '',
                 isi:'' 
@@ -94,7 +104,7 @@ export default {
 
     var listNews = firebase.database().ref().child('news');
 
-     listNews.once("value", notes => {
+     /*listNews.once("value", notes => {
       notes.forEach(note => {
         this.news.push({
           id: note.ref.key,
@@ -103,7 +113,7 @@ export default {
           tanggal: note.child("tanggal").val()
         });
       });
-    });
+    });*/
 
      /* eslint-disable no-console */
     // value = snapshot.val() | id = snapshot.key
@@ -112,30 +122,61 @@ export default {
       this.news.push({
           id: snapshot.key,
           title: snapshot.val().title, 
-          isi: snapshot.val().isi 
+          isi: snapshot.val().isi ,
+          tanggal: snapshot.val().tanggal 
         });
     });
  
-    /*notesRef.on("child_removed", snapshot => {
-      const deletedNote = this.notes.find(note => note.id === snapshot.key);
+    listNews.on("child_removed", snapshot => {
+      const deletedNote = this.news.find(note => note.id === snapshot.key);
       console.log("note was removed: ", deletedNote);
  
-      const index = this.notes.indexOf(deletedNote);
-      this.notes.splice(index, 1);
+      const index = this.news.indexOf(deletedNote);
+      this.news.splice(index, 1);
       this.index = this.index === 0 ? 0 : index - 1;
     });
- 
-    notesRef.on("child_changed", snapshot => {
-      const updatedNote = this.notes.find(note => note.id === snapshot.key);
+  
+    listNews.on("child_changed", snapshot => {
+      const updatedNote = this.news.find(note => note.id === snapshot.key);
       updatedNote.title = snapshot.val().title;
-      updatedNote.content = snapshot.val().content;
+      updatedNote.isi = snapshot.val().isi;
       console.log("note was updated: ", updatedNote);
-    });*/
+    });
     /* eslint-enable no-console */
 
 
    },
   methods:{
+    hapusNews(news){
+       this.$swal({
+                   title: 'Hapus?',
+                    text: "Data akan dihapus secara permanen",
+                    type: 'question',
+                    showCancelButton: true, 
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal', 
+                    showLoaderOnConfirm: true,
+                    reverseButtons: false,
+                    closeOnConfirm: false 
+                }).then((result) => {
+                    
+                  if (result.value) {
+
+                    let userRef = firebase.database().ref('news/' + news.id); 
+                    userRef.remove() 
+
+                    this.$swal({
+                        type:'success',
+                        title: 'Deleted!',
+                        showConfirmButton: false,
+                        text: 'Berita terhapus!',
+                        timer: 2000 
+                    }) 
+                  }  else if (result.dismiss === 'cancel') { 
+                  }
+                }) 
+      
+    },
     modeAddNews(){
         this.addNews = true;
     },

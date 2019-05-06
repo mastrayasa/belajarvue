@@ -5,14 +5,13 @@
 
         <div class="text-center">
 
-
             <!-- <img src="@/assets/profil.jpg" class="img-fluid w-100 mb-3" /> -->
-            <img :src="user.photoURL" class="img-fluid w-100 mb-3" />
+            <img :src="form.photoURL" class="img-fluid w-100 mb-3" />
 
             <div class="text-center">
-                <h2>{{ user.displayName }}</h2>
+                <h2>{{ form.nama }}</h2>
                 <p>{{ user.email }}</p>
-                <p>
+                <p> 
                     <button @click="logout">Logout</button>
                 </p>
             </div> 

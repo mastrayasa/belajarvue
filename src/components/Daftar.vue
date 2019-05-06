@@ -11,6 +11,18 @@
           class="mb-2">
 
   		<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group id="exampleInputGroup0"
+                    label="Alamat Email"
+                    label-for="exampleInput0"
+                    >
+        <b-form-input id="exampleInput0"
+                      type="text"
+                      v-model="form.nama"
+                      required
+                      placeholder="Nama lengkap anda">
+        </b-form-input>
+      </b-form-group>
+
       <b-form-group id="exampleInputGroup1"
                     label="Alamat Email"
                     label-for="exampleInput1"
@@ -31,18 +43,6 @@
                       v-model="form.password"
                       required
                       placeholder="Kata Sandi Baru">
-        </b-form-input>
-      </b-form-group>
-
-
-      <b-form-group id="exampleInputGroup3"
-                    label="Ulangi Kata Sandi"
-                    label-for="exampleInput3">
-        <b-form-input id="exampleInput3"
-                      type="password"
-                      v-model="form.rePassword"
-                      required
-                      placeholder="Ulangi Kata Sandi">
         </b-form-input>
       </b-form-group> 
       <b-row>
@@ -75,7 +75,7 @@ export default {
       form: {
         email: '',
         password: '',
-        rePassword:''
+        nama:''
       }, 
       show: true
     }
@@ -84,26 +84,56 @@ export default {
     onSubmit (evt) {
         evt.preventDefault(); 
         this.isLoading = true;
-        if(this.form.password == this.form.rePassword){
-            firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => {
+            firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => { 
+              
                 this.isLoading = false;
-                this.$auth.setLogin("isLogin");
+                this.$auth.setLogin("isLogin")
                 this.$router.replace('profile')
             },
             (err)  => {
                 this.isLoading = false;
                 alert("opsss" + err.message)
              });
-        } else  {
-            alert("Kata sandi tidak sama")
-        }
+
+            /*var namabaru = this.form.nama;
+
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+
+              user.updateProfile({
+                displayName: namabaru
+              }).then(function() {  
+
+                
+
+              }).catch(function(error) {
+                alert("An error happened.")
+              });
+
+
+              // User is signed in.
+              var displayName = user.displayName;
+              var email = user.email;
+              var emailVerified = user.emailVerified;
+              var photoURL = user.photoURL;
+              var isAnonymous = user.isAnonymous;
+              var uid = user.uid;
+              var providerData = user.providerData;
+
+              console.log("" +user.email)
+              // ...
+            } else {
+              // User is signed out.
+              // ...
+            }
+          });*/
     },
     onReset (evt) {
       evt.preventDefault();
       /* Reset our form values */
       this.form.email = '';
       this.form.password = ''; 
-      this.form.rePassword = ''; 
+      this.form.nama = ''; 
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });

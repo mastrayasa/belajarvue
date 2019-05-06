@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Maincontent from '@/components/Maincontent'
+import Mainfull from '@/components/Mainfull'
+
 import Home from '@/components/Home'
 import About from '@/components/About'
 import Login from '@/components/Login'
@@ -13,6 +15,8 @@ import Hero from '@/components/Hero'
 import News from '@/components/news/News'
 import NewsDetail from '@/components/news/NewsDetail'
 import ManageNews from '@/components/news/ManageNews'
+import NewsEdit from '@/components/news/NewsEdit'
+
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -106,7 +110,19 @@ const router = new Router({
     { 
       path: '/manage-news',
       name: 'ManageNews',
-      component: ManageNews
+      component: Mainfull,
+      children:[
+        {
+          path:'',
+          component: ManageNews
+        },
+        {
+          path: 'edit/:id',
+          meta: {label: 'News Edit'},
+          name: 'NewsEdit',
+          component: NewsEdit
+        }
+      ] 
     }
   ]
 });
