@@ -1,12 +1,7 @@
 <template>
     <div class="row mt-5">
-   
         <div class="col-md-12">
-
-         	
-
          	<h2 v-if="!addNews">Manage News</h2> 
-
              <b-button @click="modeAddNews" v-if="!addNews" variant="outline-primary">Tambah Baru </b-button>
                 
               <b-table v-if="!addNews" hover outlined :items="news" :fields="fields">
@@ -22,17 +17,11 @@
                   </template>
               </b-table>
 
-              
-
-              
-            
-
              <b-form @submit="onSubmit" @reset="onReset" v-if="addNews">
-            <h2>Tambah Berita</h2>
+                <h2>Tambah Berita</h2>
       <b-form-group id="exampleInputGroup1"
                     label="Title"
-                    label-for="exampleInput1"
-                    >
+                    label-for="exampleInput1">
         <b-form-input id="exampleInput1"
                       type="text"
                       v-model="form.title"
@@ -55,12 +44,10 @@
       </b-form-group> 
        
       <b-button type="submit" variant="primary">Tambah</b-button> 
-    </b-form>
+      <b-button @click="addNews = false" type="button" variant="default">Batal</b-button> 
+              </b-form>
 
-        </div>
-
-         
-
+        </div> 
     </div>
 </template>
 

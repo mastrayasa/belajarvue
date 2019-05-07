@@ -41,6 +41,7 @@ Vue.use(VueAxios, axios)
 
 Vue.use(Router)
 const router = new Router({
+ 
   routes: [
     {
       path: '/',

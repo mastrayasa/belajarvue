@@ -86,48 +86,32 @@ export default {
         this.isLoading = true;
             firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password).then( (user) => { 
               
-                this.isLoading = false;
-                this.$auth.setLogin("isLogin")
-                this.$router.replace('profile')
+                
             },
             (err)  => {
                 this.isLoading = false;
                 alert("opsss" + err.message)
              });
 
-            /*var namabaru = this.form.nama;
+            
 
-            firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-
-              user.updateProfile({
-                displayName: namabaru
-              }).then(function() {  
-
-                
-
-              }).catch(function(error) {
-                alert("An error happened.")
-              });
-
-
-              // User is signed in.
-              var displayName = user.displayName;
-              var email = user.email;
-              var emailVerified = user.emailVerified;
-              var photoURL = user.photoURL;
-              var isAnonymous = user.isAnonymous;
-              var uid = user.uid;
-              var providerData = user.providerData;
-
-              console.log("" +user.email)
-              // ...
-            } else {
-              // User is signed out.
-              // ...
-            }
-          });*/
+            firebase.auth().onAuthStateChanged(this.setNama);
     },
+    redirectaja () {
+      this.isLoading = false;
+      this.$auth.setLogin("isLogin")
+      this.$router.replace('profile')
+    },
+    setNama (user) {
+            if (user) {
+              user.updateProfile({
+                displayName: this.form.nama,
+                photoURL: "https://www.inspiredre.com.au/wp-content/uploads/2017/10/female-face-placeholder.png"
+              }).then(this.redirectaja).catch();
+ 
+              
+            }  
+          },
     onReset (evt) {
       evt.preventDefault();
       /* Reset our form values */

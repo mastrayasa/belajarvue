@@ -61,7 +61,7 @@
             <hr>
             <span class="text-muted">
               <i>
-                dikembangkan dengan cinta oleh  anak bangsa
+                dikembangkan dengan cinta oleh  anak bangsa v.1.2
               </i>
             </span>
         </div>  

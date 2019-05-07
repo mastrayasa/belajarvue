@@ -26,8 +26,8 @@ export default {
                     href: '#/'
                 },
                 {
-                    text: 'Berita 2',
-                    href: '#/berita'
+                    text: 'Berita',
+                    href: '#/news'
                 }
             ],
     		news: [] 
